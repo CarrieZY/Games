@@ -172,6 +172,9 @@ $(document).keydown(function(event){
 document.addEventListener('touchstart', function(event){
 	startx=event.touches[0].pageX;
 	starty=event.touches[0].pageY;
+});
+document.addEventListener('touchmove', function(event){
+event.preventDefault();
 })
 document.addEventListener('touchend', function(event){
 	endx=event.changedTouches[0].pageX;
