@@ -194,7 +194,7 @@ document.addEventListener('touchend', function(event){
              generateOneNumber();
             isgameover();
         }
-		}else{
+		}else if(deltax<0){
 		//left
 		if(moveLeft()){
             generateOneNumber();
@@ -208,8 +208,7 @@ document.addEventListener('touchend', function(event){
              generateOneNumber();
             isgameover();
         }
-		}else{
-			//up
+		}elseif(deltay<0)//up
 			if(moveUp()){
              generateOneNumber();
             isgameover();
