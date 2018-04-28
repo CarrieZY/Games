@@ -187,28 +187,28 @@ document.addEventListener('touchend', function(event){
 		if(deltax>0){
 			//moveright
 			if(moveRight()){
-            setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
-            setTimeout("isgameover()", 300);
+             generateOneNumber();
+            isgameover();
         }
 		}else{
 		//left
 		if(moveLeft()){
-            setTimeout("generateOneNumber()",210);
-            setTimeout("isgameover()",300);//300毫秒
+            generateOneNumber();
+            isgameover();
         }
 		}
 	}else{
 		if(deltay>0){
 			//down
 			if(moveDown()){
-             setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
-            setTimeout("isgameover()", 300);
+             generateOneNumber();
+            isgameover();
         }
 		}else{
 			//up
 			if(moveUp()){
-            setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
-            setTimeout("isgameover()", 300);
+             generateOneNumber();
+            isgameover();
         }
 		}
 	}
