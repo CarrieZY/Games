@@ -137,6 +137,7 @@ $(document).keydown(function(event){
     switch (event.keyCode) {
     case 37://left
         if(moveLeft()){
+		event.preventDefault();
             setTimeout("generateOneNumber()",210);
            // generateOneNumber();//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()",300);//300毫秒
@@ -144,18 +145,21 @@ $(document).keydown(function(event){
         break;
     case 38://up
         if(moveUp()){
+		event.preventDefault();
             setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()", 300);
         }
         break;
     case 39://right
         if(moveRight()){
+		event.preventDefault();
             setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()", 300);
         }
         break;
     case 40://down
         if(moveDown()){
+		event.preventDefault();
              setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()", 300);
         }
@@ -176,8 +180,10 @@ document.addEventListener('touchend', function(event){
 
 	var deltax=endx-starty;
 	var deltay=endy-starty;
+	if(Math.abs(deltax)<0.3*documentWidth && Math.abs(deltay)<0.3*documentWidth)
+		return;
     //判断是否在x轴滑动   反之则在y轴滑动
-	if(Math.abs(deltax)>Math.abs(deltay)){
+	if(Math.abs(deltax)>=Math.abs(deltay)){
 		if(deltax>0){
 			//moveright
 			if(moveRight()){
