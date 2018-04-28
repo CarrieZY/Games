@@ -173,10 +173,10 @@ document.addEventListener('touchstart', function(event){
 	startx=event.touches[0].pageX;
 	starty=event.touches[0].pageY;
 });
-//document.addEventListener('touchmove', function(event){
-//	event.preventDefault();
-//	event.stopPropagation();
-//})
+document.addEventListener('touchmove', function(event){
+	event.preventDefault();
+	event.stopPropagation();
+})
 document.addEventListener('touchend', function(event){
 	endx=event.changedTouches[0].pageX;
 	endy=event.changedTouches[0].pageY;
