@@ -177,7 +177,7 @@ document.addEventListener('touchend', function(event){
 	var deltax=endx-starty;
 	var deltay=endy-starty;
     //判断是否在x轴滑动   反之则在y轴滑动
-	if(Math.abs(deltax)>+Math.abs(deltay)){
+	if(Math.abs(deltax)>Math.abs(deltay)){
 		if(deltax>0){
 			//moveright
 			if(moveRight()){
