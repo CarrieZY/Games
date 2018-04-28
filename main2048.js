@@ -77,6 +77,7 @@ function updateBoardView(){
             $("#grid-content").append('<div class="number-cell" id="number-cell-'+i+'-'+j+'"></div>');
             var theNumberCell = $('#number-cell-'+i+'-'+j);
             if(board[i][j] == 0){
+
                 theNumberCell.css('width','0px');
                 theNumberCell.css('height','0px');
                 theNumberCell.css('top',getPosTop(i,j)+cellSidelength/2);
@@ -114,7 +115,7 @@ function generateOneNumber(){
             break;
         randx = parseInt(Math.floor(Math.random()*4));
         randy = parseInt(Math.floor(Math.random()*4));
-    	times++;
+   	times++;
     }
     if(times==50){
     	for(var i=0;i<4;i++)
@@ -137,7 +138,6 @@ $(document).keydown(function(event){
     switch (event.keyCode) {
     case 37://left
         if(moveLeft()){
-		event.preventDefault();
             setTimeout("generateOneNumber()",210);
            // generateOneNumber();//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()",300);//300毫秒
@@ -145,21 +145,18 @@ $(document).keydown(function(event){
         break;
     case 38://up
         if(moveUp()){
-		event.preventDefault();
             setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()", 300);
         }
         break;
     case 39://right
         if(moveRight()){
-		event.preventDefault();
             setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()", 300);
         }
         break;
     case 40://down
         if(moveDown()){
-		event.preventDefault();
              setTimeout("generateOneNumber()", 210);//每次新增一个数字就可能出现游戏结束
             setTimeout("isgameover()", 300);
         }
@@ -172,7 +169,7 @@ $(document).keydown(function(event){
 document.addEventListener('touchstart', function(event){
 	startx=event.touches[0].pageX;
 	starty=event.touches[0].pageY;
-});
+})
 document.addEventListener('touchend', function(event){
 	endx=event.changedTouches[0].pageX;
 	endy=event.changedTouches[0].pageY;
@@ -180,17 +177,15 @@ document.addEventListener('touchend', function(event){
 
 	var deltax=endx-starty;
 	var deltay=endy-starty;
-	if(Math.abs(deltax)<0.3*documentWidth && Math.abs(deltay)<0.3*documentWidth)
-		return;
     //判断是否在x轴滑动   反之则在y轴滑动
-	if(Math.abs(deltax)>=Math.abs(deltay)){
+	if(Math.abs(deltax)>+Math.abs(deltay)){
 		if(deltax>0){
 			//moveright
 			if(moveRight()){
-             generateOneNumber();
+            generateOneNumber();
             isgameover();
         }
-		}else if(deltax<0){
+		}else{
 		//left
 		if(moveLeft()){
             generateOneNumber();
@@ -204,9 +199,10 @@ document.addEventListener('touchend', function(event){
              generateOneNumber();
             isgameover();
         }
-		}elseif(deltay<0)//up
+		}else{
+			//up
 			if(moveUp()){
-             generateOneNumber();
+           generateOneNumber();
             isgameover();
         }
 		}
@@ -248,8 +244,8 @@ function moveLeft(){//更多地细节信息
                         //move
                         showMoveAnimation(i, j,i,k);
                         //add
-                        board[i][k] += board[i][j];
-                        board[i][j] = 0;
+                       board[i][k] += board[i][j];
+                       board[i][j] = 0;
                         score+=board[i][k]
                         updateScore(score);
                         continue;
@@ -280,11 +276,11 @@ function moveUp(){//更多地细节信息
                     }
                     //落脚位置的数字和本来的数字相等 && 中间没有障碍物
                     else if(board[k][j] == board[i][j] && noBlockVertical(j ,i, k, board) && !hasConflicted[i][k]){
-                        //move
-                        showMoveAnimation(i, j,k,j);
-                        //add
-                        board[k][j] += board[i][j];
-                        board[i][j] = 0;
+                       //move
+                       showMoveAnimation(i, j,k,j);
+                       //add
+                       board[k][j] += board[i][j];
+                       board[i][j] = 0;
                         score+= board[k][j]
                         updateScore(score);
                         continue;
@@ -305,11 +301,11 @@ function moveRight(){
     for(var i = 0;i<4;i++)
         for(var j = 2;j>=0;j--){
             if(board[i][j] !=0){
-                //(i,j)左侧的元素
-                for(var k = 3;k>j;k--){
-                    //落脚位置的是否为空 && 中间没有障碍物
-                    if(board[i][k] == 0 && noBlockHorizontal(i , k, j, board)){
-                        //move
+               //(i,j)左侧的元素
+               for(var k = 3;k>j;k--){
+                   //落脚位置的是否为空 && 中间没有障碍物
+                   if(board[i][k] == 0 && noBlockHorizontal(i , k, j, board)){
+                       //move
                         showMoveAnimation(i, j,i,k);
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
@@ -363,10 +359,9 @@ function moveDown(){
                         continue;
                     }
                 }
-            }
-        }
+           }
+       }
 
 	setTimeout("updateBoardView()",200);
     return true;
 }
-
